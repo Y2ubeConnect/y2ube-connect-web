@@ -1,12 +1,14 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
 import LoadingUI from "./LoadingUI";
 import Image from "next/image";
 import { Button } from "./ui/button";
 
 const HomeClient = () => {
+  const router = useRouter();
+
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -36,7 +38,7 @@ const HomeClient = () => {
         We are excited to have you here at Y2ubeConnect.
       </div>
       <div>
-        <Button>My Uploads</Button>
+        <Button onClick={() => router.push("/uploads")}>My Uploads</Button>
       </div>
     </div>
   );
