@@ -69,6 +69,7 @@
   @layer base {
     * {
       @apply border-border;
+      -ms-overflow-style: none;
     }
     html {
       @apply h-full w-full;
@@ -77,3 +78,7 @@
       @apply h-full w-full;
     }
   }
+
+::-webkit-scrollbar {
+  display: none;
+}

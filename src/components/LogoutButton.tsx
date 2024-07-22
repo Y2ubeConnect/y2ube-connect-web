@@ -11,7 +11,10 @@ const LogoutButton = () => {
   }
 
   return (
-    <Button variant="destructive" onClick={() => signOut()}>
+    <Button
+      variant="destructive"
+      onClick={() => signOut({ callbackUrl: "/sign-in" })}
+    >
       Logout
     </Button>
   );
