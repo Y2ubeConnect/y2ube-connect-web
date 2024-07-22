@@ -2,6 +2,9 @@
 
 import { useSession, signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
+import LoadingUI from "./LoadingUI";
+import Image from "next/image";
+import { Button } from "./ui/button";
 
 const HomeClient = () => {
   const { data: session, status } = useSession({
@@ -12,13 +15,29 @@ const HomeClient = () => {
   });
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <LoadingUI />;
   }
 
   return (
-    <div className="h-full w-full">
-      Signed in as {session!.user!.email} <br />
-      <button onClick={() => signOut()}>Sign out</button>
+    <div className="flex-grow flex flex-col justify-center items-center">
+      <div>
+        <Image
+          className="rounded-full"
+          src={session!.user!.image!}
+          alt="display picture"
+          width={125}
+          height={125}
+        />
+      </div>
+      <div className="mt-6 mb-6 text-2xl text-gray-900 font-semibold">
+        Welcome, {session!.user!.name!}!
+      </div>
+      <div className="mb-6 text-gray-600">
+        We are excited to have you here at Y2ubeConnect.
+      </div>
+      <div>
+        <Button>My Uploads</Button>
+      </div>
     </div>
   );
 };
