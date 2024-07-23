@@ -97,6 +97,31 @@ export const generateSignedUrlForRead = async (
   }
 };
 
+export const generateSignedUrlForDelete = async (
+  userEmail: string,
+  fileName: string
+) => {
+  const filePath = `${userEmail}/${fileName}`;
+
+  const options: GetSignedUrlConfig = {
+    version: "v4",
+    action: "delete",
+    expires: Date.now() + 5 * 60 * 1000,
+  };
+
+  try {
+    const [url] = await storage
+      .bucket(bucketName)
+      .file(filePath)
+      .getSignedUrl(options);
+
+    return { url };
+  } catch (err) {
+    console.error(err);
+    throw new Error("Error generating signed URL");
+  }
+};
+
 export const getUploadedVideos = async (userEmail: string) => {
   try {
     const prefix = `${userEmail}/`;

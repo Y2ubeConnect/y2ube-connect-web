@@ -42,7 +42,7 @@ const UploadedVideos = () => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        return toast({
+        toast({
           variant: "destructive",
           title: "Error loading videos",
           description:
@@ -61,12 +61,16 @@ const UploadedVideos = () => {
 
   if (loading) return <LoadingUI />;
 
+  const handleOnDelete = (filename: string) => {
+    setVideos((prev) => prev.filter((v) => v.filename !== filename));
+  };
+
   return (
     <div className="mt-6">
       <ul>
         {videos.map((video, index) => (
           <li key={index}>
-            <UploadedVideo video={video} />
+            <UploadedVideo video={video} onDelete={handleOnDelete} />
           </li>
         ))}
       </ul>
