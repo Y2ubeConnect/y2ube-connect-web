@@ -1,7 +1,6 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import LoadingUI from "./LoadingUI";
 import { getUploadedVideos } from "../lib/actions/gcp.actions";
@@ -9,12 +8,7 @@ import { useToast } from "./ui/use-toast";
 import UploadedVideo from "./UploadedVideo";
 
 const UploadedVideos = () => {
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/sign-in");
-    },
-  });
+  const { data: session } = useSession();
 
   const { toast } = useToast();
 
@@ -28,15 +22,11 @@ const UploadedVideos = () => {
 
   useEffect(() => {
     const fetchUploadedVideos = async () => {
-      if (status === "loading") {
-        return;
-      }
-
       setLoading(true);
 
       try {
         const { uploadedVideos } = await getUploadedVideos(
-          session.user!.email!
+          session!.user!.email!
         );
         setVideos(uploadedVideos);
         setLoading(false);
@@ -53,11 +43,7 @@ const UploadedVideos = () => {
 
     fetchUploadedVideos();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
-
-  if (status === "loading") {
-    return <LoadingUI />;
-  }
+  }, []);
 
   if (loading) return <LoadingUI />;
 

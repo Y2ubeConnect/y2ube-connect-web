@@ -1,24 +1,14 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import LoadingUI from "./LoadingUI";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { useSession } from "next-auth/react";
 
 const HomeClient = () => {
   const router = useRouter();
 
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/sign-in");
-    },
-  });
-
-  if (status === "loading") {
-    return <LoadingUI />;
-  }
+  const { data: session } = useSession();
 
   return (
     <div className="flex-grow flex flex-col justify-center items-center">
