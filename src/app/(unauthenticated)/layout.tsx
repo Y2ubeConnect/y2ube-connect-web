@@ -1,7 +1,6 @@
 import Navbar from "../../components/Navbar";
-import { Toaster } from "../../components/ui/toaster";
 
-export default function RootLayout({
+export default function UnauthenticatedLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -10,7 +9,6 @@ export default function RootLayout({
     <main className="h-screen w-full flex flex-col">
       <Navbar />
       {children}
-      <Toaster />
     </main>
   );
 }

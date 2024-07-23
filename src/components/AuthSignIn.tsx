@@ -7,13 +7,13 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 
 const AuthSignIn = () => {
-  const { status } = useSession();
+  const { data: session, status } = useSession();
 
   if (status === "loading") {
     return <LoadingUI />;
   }
 
-  if (status === "authenticated") {
+  if (session?.user) {
     redirect("/");
   }
 

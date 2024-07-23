@@ -17,16 +17,7 @@ const UploadVideoForm = () => {
   const router = useRouter();
   const { toast } = useToast();
 
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/sign-in");
-    },
-  });
-
-  if (status === "loading") {
-    return <LoadingUI />;
-  }
+  const { data: session } = useSession();
 
   const handleFileChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -52,7 +43,7 @@ const UploadVideoForm = () => {
       setFileUploading(true);
 
       const { url } = await generateSignedUrl(
-        session.user!.email!,
+        session!.user!.email!,
         file.name,
         file.type
       );

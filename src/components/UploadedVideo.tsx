@@ -20,23 +20,14 @@ const UploadedVideo = ({
 
   const { toast } = useToast();
 
-  const { data: session, status } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/sign-in");
-    },
-  });
-
-  if (status === "loading") {
-    return <LoadingUI />;
-  }
+  const { data: session } = useSession();
 
   const handleDelete = async () => {
     setIsDeleting(true);
 
     try {
       const { url } = await generateSignedUrlForDelete(
-        session.user!.email!,
+        session!.user!.email!,
         video.filename
       );
 
