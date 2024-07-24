@@ -1,13 +1,12 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { Download, Trash2 } from "lucide-react";
+import { Download, Play, Trash2 } from "lucide-react";
 import { useToast } from "./ui/use-toast";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import LoadingUI from "./LoadingUI";
 import { useState } from "react";
 import { generateSignedUrlForDelete } from "../lib/actions/gcp.actions";
+import Link from "next/link";
 
 const UploadedVideo = ({
   video,
@@ -77,6 +76,16 @@ const UploadedVideo = ({
         >
           <Trash2 className="h-4 w-4" />
         </Button>
+        <Link href={`/uploads/${video.filename}`}>
+          <Button
+            variant="outline"
+            className="ml-4"
+            size="icon"
+            disabled={isDeleting}
+          >
+            <Play className="h-4 w-4" />
+          </Button>
+        </Link>
       </div>
     </div>
   );
