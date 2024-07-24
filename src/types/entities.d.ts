@@ -4,8 +4,3 @@ interface User {
   name: string;
   accessToken: string;
 }
-
-interface AuthContextProps {
-  user: User | null;
-  loading: boolean;
-}
