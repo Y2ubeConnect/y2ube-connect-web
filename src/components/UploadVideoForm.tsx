@@ -7,8 +7,7 @@ import { File as FileIcon } from "lucide-react";
 import { ChangeEventHandler, useState } from "react";
 import { generateSignedUrl } from "../lib/actions/gcp.actions";
 import { useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import LoadingUI from "./LoadingUI";
+import { useRouter } from "next/navigation";
 import { useToast } from "./ui/use-toast";
 
 const UploadVideoForm = () => {

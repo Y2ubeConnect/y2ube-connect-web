@@ -1,20 +1,23 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import LoadingUI from "./LoadingUI";
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { Router } from "lucide-react";
 
 const AuthSignIn = () => {
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   if (status === "loading") {
     return <LoadingUI />;
   }
 
   if (session?.user) {
-    redirect("/");
+    router.push("/");
+    return null;
   }
 
   return (
