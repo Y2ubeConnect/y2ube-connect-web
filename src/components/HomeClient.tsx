@@ -4,11 +4,15 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { useSession } from "next-auth/react";
+import useChannelList from "../hooks/useChannelList";
 
 const HomeClient = () => {
   const router = useRouter();
 
   const { data: session } = useSession();
+
+  const channels = useChannelList(session!.accessToken);
+  console.log(channels);
 
   return (
     <div className="flex-grow flex flex-col justify-center items-center">

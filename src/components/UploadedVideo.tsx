@@ -63,7 +63,7 @@ const UploadedVideo = ({
       </div>
       <div className="flex mt-2">
         <a href={video.signedUrl} download={video.filename} target="_blank">
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon" disabled={isDeleting}>
             <Download className="h-4 w-4" />
           </Button>
         </a>
