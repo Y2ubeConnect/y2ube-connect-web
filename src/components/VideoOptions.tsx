@@ -12,7 +12,7 @@ const VideoOptions = ({
   return (
     <>
       <a href={videoUrl} download={filename} target="_blank">
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" disabled={isDeleting}>
           <Download className="h-4 w-4" />
         </Button>
       </a>
